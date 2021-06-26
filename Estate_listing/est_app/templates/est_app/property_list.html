@@ -1,0 +1,75 @@
+{% extends "est_app/base.html" %}
+
+
+{% block bodyblk%}
+
+<div class="props">
+    {% if user.is_authenticated %}
+        <h3 id="ph3">Click <a href="{% url 'property_new' %}">here</a> to create new properties</h3>
+        <br><br>
+    {% endif %}
+
+    <div class="row search">
+        <div class="col-lg-8 col-md-8 col-xs-12">
+            <p id="hp">Here you will find details of our available properties</p>
+        </div>
+        <div class="col-lg-4 col-md-8 col-xs-12">
+            <form action="{% url 'search' %}" method="POST">
+                {% csrf_token %} 
+                <input type="text" name="name" placeholder="State or Zipcode">
+                <input type="submit" name="submit" value="Search">
+            </form>
+        </div>
+    </div><br>
+
+    <h2 id="ph2">Estate Brokers available Properties</h2>
+        <br><br>
+    <table class="ppt-table">
+        {% comment %}
+        <tr >
+            <th class="ath">Photo</th>
+            <th class="ath">Title</th>
+            <th class="ath">Price</th>
+            <th class="ath">Rooms</th>
+        </tr>
+        {% endcomment %}
+        {% for ppt in property_list %}
+
+        <tr>
+            <td class="ptd"><img id="pptimg" src="{{ ppt.picture.url }}" alt="property image"></td>
+            <td class="ptd"><a id="ptitle" href="{% url 'property_detail' pk=ppt.pk %}">
+                {{ ppt.title }}</a></td>
+            <td class="ptd">Price: ${{ ppt.price }} <br> <br> {{ ppt.rooms }} rooms</td>
+            <td class="ptd">Location: {{ ppt.location }} <br> <br> Zipcode: {{ ppt.zipcode }}
+            <br> <br> <div class="date">
+                <p> Published: {{ ppt.published_date|date:"D M Y" }}</p>
+            </div></td>
+          
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{%endblock%}

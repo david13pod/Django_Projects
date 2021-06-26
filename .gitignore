@@ -1,0 +1,6 @@
+#Pictures
+Estate_listing/media
+
+
+# sqlite database
+db.sqlite3

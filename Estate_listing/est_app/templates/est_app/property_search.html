@@ -1,0 +1,31 @@
+
+{% extends "est_app/base.html" %}
+
+
+{% block bodyblk%}
+
+{% if results %}
+<table class="ppt-table">
+    
+    <p id="hp">Your search result:</p>
+    
+    {% for ppt in results %}
+
+    <tr>
+        <td class="ptd"><img id="pptimg" src="{{ ppt.picture.url }}" alt="property image"></td>
+        <td class="ptd"><a id="ptitle" href="{% url 'property_detail' pk=ppt.pk %}">
+            {{ ppt.title }}</a></td>
+        <td class="ptd">Price: ${{ ppt.price }} <br> <br> {{ ppt.rooms }} rooms</td>
+        <td class="ptd">Location: {{ ppt.location }} <br> <br> Zipcode: {{ ppt.zipcode }}
+        <br> <br> <div class="date">
+            <p> Published: {{ ppt.published_date|date:"D M Y" }}</p>
+        </div></td>
+      
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h2>We currently do not have any available property in {{location}}</h2>
+{% endif %}
+
+{%endblock%}

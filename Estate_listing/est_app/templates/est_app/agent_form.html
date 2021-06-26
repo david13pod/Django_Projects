@@ -1,0 +1,16 @@
+{% extends "est_app/base.html" %}
+
+
+{% block bodyblk%}
+
+    <h2>Agent Form</h2>
+
+    <form class="agent-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+    <script>var editor = new MediumEditor('.editable');</script>
+
+{%endblock%}

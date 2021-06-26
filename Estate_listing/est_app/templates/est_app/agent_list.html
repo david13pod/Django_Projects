@@ -1,0 +1,35 @@
+{% extends "est_app/base.html" %}
+
+
+{% block bodyblk%}
+
+<div class="agents">
+    <h3 id="ah3">Click <a href="{% url 'agent_new' %}">here</a> to create new agents</h3>
+    <br><br>
+    <table class="agent-table">
+        <tr >
+            <th class="ath">Photo</th>
+            <th class="ath">Firstname</th>
+            <th class="ath">Lastname</th>
+            <th class="ath">Contact</th>
+            <th class="ath">Email Address</th>
+        </tr>
+        {% for agent in agent_list %}
+
+        <tr>
+            <td class="atd"><img id="agtimg" src="{{ agent.pix.url }}" alt="agent image"></td>
+            <td class="atd"><a  href="{% url 'agent_detail' pk=agent.pk %}">
+                {{ agent.firstname }}</a></td>
+            <td class="atd">
+                {{ agent.lastname }}</td>
+            <td class="atd">{{ agent.contact }}</td>
+            <td class="atd">{{ agent.email }}</td>
+            {% comment %} {{agent}}{% endcomment %}
+          
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+{%endblock%}

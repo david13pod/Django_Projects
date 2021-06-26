@@ -1,0 +1,131 @@
+{% extends "est_app/base.html" %}
+
+
+{% block bodyblk%}
+
+{% if form %}
+<div class="enqp">
+    <p>Fill form below to contact the agent in charge of this property</p>
+        
+</div>
+<div class="enquire">
+    <form method="POST" class="enq-form">
+        {% csrf_token %}
+        {{form.as_p }}
+        <button type="submit" class="save btn btn-default">Contact Agent</button>
+    </form>
+    {% comment %}
+    <script>var editor = new MediumEditor('.editable');</script>
+      
+    {% endcomment %}
+</div>
+{% endif %}
+
+<div class="jumbotron pjb">
+   
+    
+    <div class="row arow">
+        <div class="col-lg-5 col-md-4 col-xs-12 pptimg">
+            <img id="pptimg" src="{{ property.picture.url }}" alt={{property.title|truncatechars:20|safe}}>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12 ">
+            <h3 id="pptcon">Number of Rooms: {{property.rooms}}</h3><br>
+            <h3 id="pptcon">Price: ${{property.price}}</h3><br>
+        </div>
+    
+    
+        <div class="col-lg-3  col-md-3 col-xs-12 ">
+            <h3 id="pptcon">Location: {{property.location}}</h3><br>
+            <h3 id="pptcon">Zipcode: {{property.zipcode}}</h3><br>
+        </div>
+        
+        {% if user.is_authenticated %}
+        <div class="col-lg-1 col-md-1 col-xs-6 pptact">
+            <div class="pact">
+                <a class="btn btn-primary" href="{% url 'property_edit' pk=property.pk %}">
+                    Update<span class="glyphicon glyphicon-pencil"></span>
+                </a><br><br><br><br>
+                <a class="btn btn-primary" href="{% url 'property_remove' pk=property.pk %}">
+                Delete<span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </div>
+        </div>
+        
+        {% endif %}
+        <div class="col-lg-12 col-xs-12 wordwrap">
+            <h3 id="ppttitle"> {{property.title}}</h3><br>
+        </div>
+        <div class="col-lg-12 col-xs-12 wordwrap ">
+            <p id="pptdes"> {{property.description|safe}}</p><br>
+        </div>
+    </div>
+    {% if not user.is_authenticated  %}    
+        {% if not form %}
+        <div class="enquiry">
+            <form action="#" method="get">
+                <label for="mybtn">Click below to contact the agent in charge of this property</label>
+                <br><input type="submit" class="btn btn-primary" value="Make Enquiry" name="mybtn">
+            </form>
+        </div>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+
+
+
+
+
+
+    {% comment %}
+
+    <div class="enquire">
+        <form method="POST" class="enq-form">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="save btn btn-default">Contact Agent</button>
+        </form>
+        
+        <script>var editor = new MediumEditor('.editable');</script>
+    </div>
+
+
+    <div class="col-lg-3 col-xs-12 ">
+        <h3 id="pptcon">Number of Rooms: {{property.room}}</h3><br>
+        <h3 id="pptcon">Price: ${{property.price}}</h3><br>
+    </div>
+
+
+    <div class="col-lg-3 col-xs-12 ">
+        <h3 id="pptcon">Location: {{property.location}}</h3><br>
+        <h3 id="pptcon">Zipcode: {{property.zipcode}}</h3><br>
+    </div>
+    <div class="col-lg-3 col-xs-12 ">
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="col-lg-3 col-xs-6 pptact">
+        <div class="pact">
+            <a class="btn btn-primary" href="{% url 'property_edit' pk=property.pk %}">
+                Update<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a class="btn btn-primary" href="{% url 'property_remove' pk=property.pk %}">
+            Delete<span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+    </div>
+    
+    
+    {% endif %}
+
+    <div class="enquiry">
+        <form action="#" method="get">
+            <label for="mybtn">Click below to contact the agent in charge of this property</label>
+            <br><input type="submit" class="btn btn-primary" value="Make Enquiry" name="mybtn">
+        </form>
+    </div>
+    {% endcomment %}
+
+
+{%endblock%}

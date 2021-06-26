@@ -1,0 +1,45 @@
+{% extends "est_app/base.html" %}
+
+
+{% block bodyblk%}
+
+    <h2 id="hw">Welcome to Estate Broker webpage</h2>
+    <br><br>
+    <div class="row search">
+        <div class="col-lg-8 col-md-8 col-xs-12">
+            <p id="hp">Here you will find details of our available properties</p>
+        </div>
+        <div class="col-lg-4 col-md-8 col-xs-12">
+            <form action="{% url 'search' %}" method="POST">
+                {% csrf_token %} 
+                <input type="text" name="name" placeholder="State or Zipcode">
+                <input type="submit" name="submit" value="Search">
+            </form>
+        </div>
+    </div><br>
+
+    <div class="props">
+        <h2 id="ph2">Editor's Pick</h2>
+            <br><br>
+        <table class="ppt-table">
+            {% for ppt in property %}
+    
+            <tr>
+                <td class="ptd"><img id="pptimg" src="{{ ppt.picture.url }}" alt="property image"></td>
+                <td class="ptd"><a id="ptitle" href="{% url 'property_detail' pk=ppt.pk %}">
+                    {{ ppt.title }}</a></td>
+                <td class="ptd">Price: ${{ ppt.price }} <br> <br> {{ ppt.rooms }} rooms</td>
+                <td class="ptd">Location: {{ ppt.location }} <br> <br> Zipcode: {{ ppt.zipcode }}
+                <br> <br> <div class="date">
+                    <p> Published: {{ ppt.published_date|date:"D M Y" }}</p>
+                </div></td>
+              
+            </tr>
+            {% endfor %}
+        </table>
+    {% comment %}
+    "{% url 'property_detail' pk=property.pk %}"
+    {% endcomment %}
+    </div>
+
+{%endblock%}

@@ -1,0 +1,12 @@
+{% extends "est_app/base.html" %}
+{% load static %}
+
+{% block bodyblk%}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <h3 class="deletew">Are you sure you want to delete "{{ object }}"?</h3>
+    <input class='btn btn-danger' type="submit" value="Confirm" />
+</form>
+
+{%endblock%}

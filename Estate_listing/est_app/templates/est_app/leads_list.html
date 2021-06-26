@@ -1,0 +1,60 @@
+{% extends "est_app/base.html" %}
+
+
+{% block bodyblk%}
+
+<div class="agents">
+    <h3 id="ah3">Leads</h3>
+    <br><br>
+    <table class="agent-table">
+        <tr >
+            <th class="ath">Name</th>
+            <th class="ath">Email Address</th>
+            <th class="ath">Property</th>
+            <th class="ath">Property Agent</th>
+            <th class="ath">Message</th>
+        </tr>
+       
+        {% for lead in leads_list %}
+
+        <tr>
+            <td class="atd"> {{ lead.firstname }} br {{ lead.lasttname }} </td>
+            <td class="atd">{{ lead.email }}</td>
+            <td class="atd"><a id="ptitle" href="{% url 'property_detail' pk=lead.property.pk %}">
+                {{ lead.property.title }}</a></td>
+            <td class="atd"><a id="ptitle" href="{% url 'agent_detail' pk=lead.property.agent.pk %}">
+                {{ lead.property.agent.firstname }}</a> <br> 
+                {{ lead.property.agent.lastname }}</td>
+            <td class="atd">{{ lead.message }}</td>
+            
+          
+        </tr>
+        {% endfor %}   {% comment %} {% endcomment %}
+    </table>
+
+</div>
+
+
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{%endblock%}
