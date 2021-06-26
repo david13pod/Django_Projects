@@ -82,11 +82,11 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django_postgres_extensions.backends.postgresql',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'estate1',
-        'USER': 'est_app',
+        'NAME': '', #fill in db name
+        'USER': '',#fill in db username
         'HOST': 'localhost',
-        'PORT': 5432,
-        'PASSWORD':'listing101'
+        'PORT': '',#fill in db port
+        'PASSWORD':''#fill in db password
     }
 }
 
