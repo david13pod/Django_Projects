@@ -9,9 +9,13 @@
         
 </div>
 <div class="enquire">
-    <form method="POST" class="enq-form">
+    <form method="POST">
         {% csrf_token %}
-        {{form.as_p }}
+        {% for field in form %}
+        <div class="row enq-form">
+            <label for="{{ field.name}}">{{ field.label}}</label>{{ field }}
+        </div>
+        {% endfor %}
         <button type="submit" class="save btn btn-default">Contact Agent</button>
     </form>
     {% comment %}

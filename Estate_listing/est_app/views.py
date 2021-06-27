@@ -28,7 +28,7 @@ class HomeView(TemplateView):
     template_name='est_app/home.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['property'] = Property.objects.filter(published_date__lte=timezone.now()).order_by('price')[:2]
+        context['property'] = Property.objects.filter(published_date__lte=timezone.now()).order_by('-rooms')[:2]
         return context
 
     # def get_queryset(self):#show all listings
@@ -74,17 +74,16 @@ def propertyDetailView(request,pk):
 
             # enquiry=cleanhtml(enquiry)
             print(enquiry)
-            send_mail(
-                'New lead from:' +firstname +lastname ,
-                f'Message from: {emailfrom} \n \n {enquiry}' ,
-                settings.EMAIL_HOST_USER,
-                [emailto],
-                fail_silently=False,
-            )
-
-            # try:
-            # except:
-            #     pass
+            try:
+                send_mail(
+                    'New lead from:' +firstname +lastname ,
+                    f'Message from: {emailfrom} \n \n {enquiry}' ,
+                    settings.EMAIL_HOST_USER,
+                    [emailto],
+                    fail_silently=False,
+                )
+            except:
+                pass
 
             return redirect('property_detail',pk=props.pk)
 
