@@ -1,6 +1,6 @@
 Steps to run this Django application
 
-1. install python directly in OS env
+1. <strong>Install python directly in OS env </strong>
 
 
 for instance on Linux
