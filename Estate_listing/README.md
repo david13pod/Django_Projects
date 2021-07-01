@@ -12,7 +12,7 @@
 
 
 
-   or preferably install anaconda software; it comes with python
+   <strong>or preferably install anaconda software;</strong> it comes with python
    
    https://www.anaconda.com/products/individual
 
