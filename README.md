@@ -129,11 +129,12 @@
  
 10. <strong>Runserver</strong>
 
-   `To run django server input the cmd below
-       ``
-    python manage.py runserver
-    ``
-    
-    Now you can view the project on your preferred web browser follwing the url on ur cmd line interface, usually: 
-    http://localhost:8000/ or
-    127.0.0.1:8000
+   To run django server input the cmd below
+   
+      ```
+       python manage.py runserver
+      ```
+      
+   Now you can view the project on your preferred web browser follwing the url on ur cmd line interface, usually: 
+   http://localhost:8000/ or
+   127.0.0.1:8000
