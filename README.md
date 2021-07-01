@@ -13,6 +13,7 @@
 
 
    or preferably install anaconda software; it comes with python
+   
    https://www.anaconda.com/products/individual
 
    guide on installing anaconda https://docs.anaconda.com/anaconda/install/
@@ -29,6 +30,7 @@
     ```
 
 2. <strong>Create Django env</strong>
+
    version 2.2
 
     ```
@@ -38,6 +40,7 @@
 3. <strong>Clone or Fork Repo from github to your local device</strong>
 
 4. <strong>Install docker on local device</strong>
+   
    https://docs.docker.com/engine/install/ubuntu/
 
    for linux:
@@ -69,6 +72,7 @@
      sudo apt-get install docker-ce docker-ce-cli containerd.io
      ```
 5. <strong>Edit docker compose file in the Postgres dir.</strong>
+   
    Input your postgres details for the following fields
    Username, Password, DB_name and Port
 
@@ -80,10 +84,12 @@
 
 
 6. <strong>Connect dockerize DB to django</strong>
+   
    Open setting.py file and ensure DATABASES section has same  Username, Password, DB_name and Port as the one in the docker compose file.
 
 
 7. <strong>Connect Your Email address</strong>
+   
    Under the EMAIL section in setting.py file, input the following:
    Host, User, Password and Port
 
@@ -97,3 +103,30 @@
    for gmail users, ensure you add django as allowed apps in gmail settings
 
 8. <strong>Migrate</strong>
+      
+   cd to the dir (Estate_listing) containing the django project and run migration cmds
+    ``
+    python manage.py makemigrations
+    ``
+     ``
+    python manage.py migrate
+    ``
+9. <strong>Create user</strong>
+
+   To create login username and password input the cmd below
+       ``
+    python manage.py createsuperuser
+    ``
+    follow the promts and type in your desired username, password and email address
+    
+ 
+10. <strong>Runserver</strong>
+
+   `To run django server input the cmd below
+       ``
+    python manage.py runserver
+    ``
+    
+    Now you can view the project on your preferred web browser follwing the url on ur cmd line interface, usually: 
+    http://localhost:8000/ or
+    127.0.0.1:8000
