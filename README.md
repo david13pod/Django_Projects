@@ -44,6 +44,7 @@
    https://docs.docker.com/engine/install/ubuntu/
 
    for linux:
+   
    Update the apt package index and install packages to allow apt to use a repository over HTTPS:
 
     ```
@@ -71,12 +72,18 @@
      sudo apt-get update
      sudo apt-get install docker-ce docker-ce-cli containerd.io
      ```
-5. <strong>Edit docker compose file in the Postgres dir.</strong>
+5. <strong>Pull postgres image from docker and Edit docker compose file.</strong>
    
-   Input your postgres details for the following fields
+   Pull postgres:12.7 image from docker to your device
+      ``
+      docker pull postgres:12.7
+      ```
+   
+   Input your desired postgres details for the following fields
    Username, Password, DB_name and Port
+   
 
-   Run the compose file:
+   Save and Run the compose file (ensure yiu are in the same dir as the dovker compose file in your command line):
      ```
     docker-compose up
      ```
