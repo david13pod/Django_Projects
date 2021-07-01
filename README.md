@@ -75,9 +75,9 @@
 5. <strong>Pull postgres image from docker and Edit docker compose file.</strong>
    
    Pull postgres:12.7 image from docker to your device
-      ``
-      docker pull postgres:12.7
-      ```
+    ```
+    docker pull postgres:12.7
+    ```
    
    Input your desired postgres details for the following fields
    Username, Password, DB_name and Port
