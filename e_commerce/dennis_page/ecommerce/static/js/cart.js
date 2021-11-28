@@ -8,11 +8,33 @@ for(var i = 0; i < updateBtns.length; i++){
 
         console.log('USER', user)
         if (user === 'AnonymousUser'){
-            console.log('not logged in')
+            addCookieItem(productId,action)
         }else{
             updateUserOrder(productId, action)
         }
     })
+}
+
+function addCookieItem(productId,action){
+    console.log('User not authenticated')
+    if (action == 'add'){
+        if (cart[productId] == undefined){
+            cart[productId] = {'quantity':1}
+        }else{
+            cart[productId]['quantity'] += 1
+        }
+    }
+    if (action == 'remove'){
+        cart[productId]['quantity'] -= 1
+        if (cart[productId]['quantity'] <= 0){
+            console.log('Item should be delete')
+            delete cart[productId]
+        }
+    }
+    console.log('cart:', cart)
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    location.reload() //reloading page each time is inefficient for large sites 
+
 }
 
 function updateUserOrder(productId, action){
