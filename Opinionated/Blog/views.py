@@ -1,3 +1,4 @@
+from http.client import FOUND, HTTPResponse
 from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import (TemplateView,ListView, DetailView,DeleteView, CreateView,UpdateView)
 from Blog.models import Post, Comment
@@ -29,6 +30,24 @@ class PostCreateView (LoginRequiredMixin, CreateView):
     form_class= PostForm
     redirect_field_name='Blog/post_detail.html'
     model=Post
+
+    def post (self, request):
+        form = self.get_form()
+        # print(request.POST)
+        # form=get_object_or_404(Post)
+        if form.is_valid():
+            # print('checkn')
+            post=form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_detail',pk=post.id)
+        else:
+            return redirect('post_list')
+
+
+    # def form_valid(self, form):
+    #     form.instance.author = self.request.user
+    #     return super().form_valid(form)
 
 class PostUpdateView (LoginRequiredMixin, UpdateView):
     login_url='/login/'

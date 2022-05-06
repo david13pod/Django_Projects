@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
-from django.contrib.auth import  views
-
+# from django.contrib.auth import  views
+from rest_framework.authtoken import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Blog.urls')),
-    path('accounts/login/', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('accounts/logout/', views.LogoutView.as_view(), name='logout', kwargs={'next_page': '/'}),
+    path('api/',include('testapis.api.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', views.obtain_auth_token, name="api_token"),
+    # path('accounts/login/', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    # path('accounts/logout/', views.LogoutView.as_view(), name='logout', kwargs={'next_page': '/'}),
 
 ]

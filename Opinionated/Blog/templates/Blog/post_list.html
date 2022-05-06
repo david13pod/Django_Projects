@@ -3,6 +3,9 @@
 {% block bodyblk %}
 
 <div class="centerstage">
+    {% if post_list.count == 0 %}
+      <h2 id="no_post">No post yet</h2>
+    {% endif %}
     {% for post in post_list %}
 
     <div class="post">

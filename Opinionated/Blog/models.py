@@ -1,15 +1,15 @@
-
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth.models import  User
 # Create your models here.
 
 class Post(models.Model):
-    author=models.ForeignKey('auth.User', on_delete=models.CASCADE) # connects each author to an auth user
+    author=models.ForeignKey(User, on_delete=models.CASCADE) # connects each author to an auth user
     published_date=models.DateTimeField(blank=True,null=True)
-    title=models.CharField(max_length=200)
+    title=models.CharField(max_length=200, null=False)
     create_date=models.DateTimeField(default=timezone.now)
-    text=models.TextField()
+    text=models.TextField(null=False)
 
     def __str__(self) :
         return self.title
